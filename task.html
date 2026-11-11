@@ -34,8 +34,6 @@
             <label>
                 <select class="form-select">
                     <option>Everyone</option>
-                    <option>Sara</option>
-                    <option>Youssef</option>
                 </select>
             </label>
         </div>
@@ -45,59 +43,9 @@
             </button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <div class="kanban-column todo">
-                <h5>To Do</h5>
-                <div class="task-card">
-                    <h6>Create login page</h6>
-                    <p>Design the login interface.</p>
-                    <span class="badge bg-danger">High</span>
-                    <small>Sara</small>
-                </div>
-                <div class="task-card">
-                    <h6>Design dashboard</h6>
-                    <p>Create the dashboard layout.</p>
-                    <span class="badge bg-warning text-dark">Medium</span>
-                    <small>Youssef</small>
-                </div>
-
-                <button class="btn btn-outline-secondary btn-sm mt-2">
-                    + Add a card
-                </button>
-
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="kanban-column in-progress">
-                <h5>In Progress</h5>
-                <div class="task-card">
-                    <h6>Fix navigation</h6>
-                    <p>Improve website navigation.</p>
-                    <span class="badge bg-danger">High</span>
-                    <small>Sara</small>
-                </div>
-                <button class="btn btn-outline-secondary btn-sm mt-2">
-                    + Add a card
-                </button>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="kanban-column done">
-                <h5>Done</h5>
-                <div class="task-card">
-                    <h6>Setup project</h6>
-                    <p>Initialize the project.</p>
-                    <span class="badge bg-success">Low</span>
-                    <small>Youssef</small>
-                </div>
-                <button class="btn btn-outline-secondary btn-sm mt-2">
-                    + Add a card
-                </button>
-            </div>
-        </div>
+    <div class="row" id="container">
     </div>
 </div>
-
+<script src="api.js"> </script>
 </body>
 </html>

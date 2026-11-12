@@ -1,19 +1,27 @@
 const state = {cards: []};
+const refreshBtn = document.getElementById("refreshBtn")
+const errorHandler = document.getElementById("errorHandler")
+const loader = document.getElementById("loader")
 
 function getData() {
     fetch("https://flowboard-api-virid.vercel.app/cards")
         .then(response => {
+            loader.style.display = "block"
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
             }
             return response.json();
         })
-        .then(result => {
-            state.cards = result;
-            displayCards();
-        })
+        .then(
+            result => {
+                state.cards = result;
+                displayCards();
+                loader.style.display = "none"
+            })
         .catch(error => {
-            console.log(error.message);
+            errorHandler.style.display = "block"
+            console.log(error.message)
+            refreshBtn.addEventListener("click", () => getData())
         });
 }
 
@@ -76,17 +84,12 @@ function displayCards() {
             } else {
                 priority.classList.add("bg-success");
             }
-
             priority.textContent = card.priority;
 
             const assignee = document.createElement("small");
             assignee.textContent = card.assignee;
-
-            taskCard.appendChild(taskTitle);
-            taskCard.appendChild(description);
-            taskCard.appendChild(priority);
-            taskCard.appendChild(document.createElement("br"));
-            taskCard.appendChild(assignee);
+            const br = document.createElement("br")
+            taskCard.append(taskTitle, description, priority, br, assignee,);
             columnContent.appendChild(taskCard);
         });
         columnElement.appendChild(columnContent);

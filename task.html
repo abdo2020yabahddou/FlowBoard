@@ -87,40 +87,43 @@
         </div>
     </header>
     <div class="row mb-4">
-        <div class="col-md-4 mb-2">
-            <label>
-                <input type="text" class="form-control" placeholder="Search tasks...">
-            </label>
-        </div>
-        <form id="filterForm">
+        <form id="filterForm" class="row mb-4">
+            <div class="col-md-4 mb-2">
+                <label>
+                    <input type="text" id="keywordFilter" class="form-control" placeholder="Search tasks...">
+                </label>
+            </div>
             <div class="col-md-3 mb-2">
                 <label>
-                    <select class="form-select">
-                        <option>All priorities</option>
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
+                    <select class="form-select" id="priorityFilter">
+                        <option value="">All priorities</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
                     </select>
                 </label>
             </div>
             <div class="col-md-3 mb-2">
                 <label>
-                    <select class="form-select">
-                        <option value="All">Everyone</option>
-                        <option value="TM1">Amina Haddad</option>
-                        <option value="TM2">Yasmine Benali</option>
-                        <option value="TM3">Thomas Leroy</option>
-                        <option value="TM4">Lucas Martin</option>
-                        <option value="TM5">Inès Moreau</option>
+                    <select class="form-select" id="assignedFilter">
+                        <option value="">Everyone</option>
+                        <option value="Amina Haddad">Amina Haddad</option>
+                        <option value="Yasmine Benali">Yasmine Benali</option>
+                        <option value="Thomas Leroy">Thomas Leroy</option>
+                        <option value="Lucas Martin">Lucas Martin</option>
+                        <option value="Inès Moreau">Inès Moreau</option>
                     </select>
                 </label>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button type="reset" class="btn btn-outline-secondary w-100" id="resetBtn">
+                    Reset
+                </button>
             </div>
         </form>
-        <div class="col-md-2 mb-2">
-            <button type="reset" class="btn btn-outline-secondary w-100" id="resetBtn">
-                Reset
-            </button>
-        </div>
+        <p id="noResults" style="display: none;">
+            No cards match your filters.
+        </p>
     </div>
     <div class="row" id="container">
     </div>
@@ -133,8 +136,8 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="filter.js"></script>
-<script src="api.js"></script>
-<script src="addCard.js"></script>
+<script type="module" src="filter.js"></script>
+<script type="module" src="api.js"></script>
+<script type="module" src="addCard.js"></script>
 </body>
 </html>

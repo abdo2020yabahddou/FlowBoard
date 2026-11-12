@@ -3,7 +3,7 @@ const refreshBtn = document.getElementById("refreshBtn")
 const errorHandler = document.getElementById("errorHandler")
 const loader = document.getElementById("loader")
 
-function getData() {
+export function getData() {
     fetch("https://flowboard-api-virid.vercel.app/cards")
         .then(response => {
             loader.style.display = "block"
@@ -15,6 +15,7 @@ function getData() {
         .then(
             result => {
                 state.cards = result;
+                console.log(result)
                 displayCards();
                 loader.style.display = "none"
             })
@@ -24,7 +25,6 @@ function getData() {
             refreshBtn.addEventListener("click", () => getData())
         });
 }
-
 
 function displayCards() {
     const container = document.getElementById("container");

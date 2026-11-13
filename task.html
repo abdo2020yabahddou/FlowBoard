@@ -69,11 +69,11 @@
                             </label>
                             <select class="form-select" id="taskAssigned" required>
                                 <option value="choose">Choose a team member's name</option>
-                                <option value="TM1">Amina Haddad</option>
-                                <option value="TM2">Yasmine Benali</option>
-                                <option value="TM3">Thomas Leroy</option>
-                                <option value="TM4">Lucas Martin</option>
-                                <option value="TM5">Inès Moreau</option>
+                                <option value="Amina Haddad">Amina Haddad</option>
+                                <option value="Yasmine Benali">Yasmine Benali</option>
+                                <option value="Thomas Leroy">Thomas Leroy</option>
+                                <option value="Lucas Martin">Lucas Martin</option>
+                                <option value="Inès Moreau">Inès Moreau</option>
                             </select>
                         </div>
                     </div>
@@ -131,8 +131,9 @@
         <p> error, please try again</p>
         <button id="refreshBtn"> refresh</button>
     </div>
-    <div id="loader" class="loader-h">
-        loading...
+    <div class="loader-container" id="loader">
+        <div class="loader"></div>
+        <p>Loading...</p>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -1,3 +1,6 @@
+import {renderCards} from "./render.js";
+import {container, state} from "./api.js";
+
 const addCardBtn = document.getElementById("addCardBtn")
 const addCardModal = document.getElementById("addCardModal")
 const closeBtn = document.querySelector(`.close`)
@@ -36,18 +39,17 @@ closeBtn.addEventListener("click", () => {
     emptyFields()
 })
 
-function validateName(name) {
+function validateTaskName() {
     const namePattern = /^[\p{L}\s]+$/u;
-    if (!namePattern.test(name.value.trim())) {
+    if (!namePattern.test(taskName.value.trim())) {
         throw new Error("Le nom doit contenir uniquement des lettres");
     }
 }
 
 submitBtn.addEventListener("click", () => {
     try {
-        validateName(taskName)
-        validateName(taskAssigned)
-        if (priority.value === "" || description.value.trim() === "" || statusTask.value === "") {
+        validateTaskName()
+        if (priority.value === "" || description.value.trim() === "" || statusTask.value === "" || taskAssigned.value === "") {
             throw new Error("Veuillez remplir tous les champs obligatoires");
         }
         const columns = [
@@ -70,33 +72,15 @@ submitBtn.addEventListener("click", () => {
         columns.filter((item) => {
             return item.status = statusTask
         })
-        const newItem = document.createElement("div");
-        newItem.className = "task-card";
-
-        const taskTitle = document.createElement("h6");
-        taskTitle.textContent = taskName.value
-
-        const taskDescription = document.createElement("p");
-        taskDescription.textContent = description.value
-
-        const taskPriority = document.createElement("span");
-        taskPriority.className = "badge";
-        if (priority.value === "high") {
-            taskPriority.classList.add("bg-danger");
-        } else if (priority.value === "medium") {
-            taskPriority.classList.add("bg-warning", "text-dark");
-        } else {
-            taskPriority.classList.add("bg-success");
-        }
-        taskPriority.textContent = priority.value
-
-        const assignee = document.createElement("small");
-        assignee.textContent = taskAssigned.value
-
-        const br = document.createElement("br")
-        newItem.append(taskTitle, taskDescription, taskPriority, br, assignee)
-        const selectedColumn = document.querySelector(`.kanban-column.${statusTask.value}`);
-        selectedColumn.appendChild(newItem);
+        const newTask = {
+            title: taskName.value,
+            description: description.value,
+            priority: priority.value,
+            assignee: taskAssigned.value,
+            status: statusTask.value
+        };
+        state.cards.push(newTask);
+        renderCards(state.cards, container);
         emptyFields()
         hideModal()
     } catch (e) {

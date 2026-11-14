@@ -1,4 +1,4 @@
-const columns = [
+export const columns = [
     {
         title: "To Do",
         status: "todo",

@@ -6,9 +6,9 @@ export const errorHandlerMsg = document.getElementById("errorHandler")
 export const loader = document.getElementById("loader")
 
 export function getData() {
+    loader.style.display = "block"
     fetch("https://flowboard-api-virid.vercel.app/cards")
         .then(response => {
-            loader.style.display = "block"
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
             }
@@ -17,7 +17,6 @@ export function getData() {
         .then(
             result => {
                 state.cards = result;
-                console.log(result)
                 displayCards();
                 loader.style.display = "none"
             })
@@ -29,17 +28,15 @@ export function getData() {
 
 export function errorHandler(error) {
     errorHandlerMsg.style.display = "block"
+    loader.style.display = "none";
     console.log(error.message)
-    refreshBtn.addEventListener("click", () => {
-        getData()
-        loader.style.display = "block"
-    })
 }
 
-export const container = document.getElementById("container");
+refreshBtn.addEventListener("click", () => {
+    getData()
+})
 
+export const container = document.getElementById("container");
 export function displayCards() {
     renderCards(state.cards, container);
 }
-
-getData();

@@ -13,118 +13,44 @@
     <header class="d-flex justify-content-between align-items-center mb-4">
         <h1>Task Board</h1>
         <button class="btn btn-primary" id="addCardBtn">+ New Card</button>
-        <div id="addCardModal" class="add-card-modal">
-            <div class="modal-content">
-                <div class="modal-header-custom">
-                    <div>
-                        <h4>Add a new task</h4>
-                    </div>
-                    <button type="button" class="close" aria-label="Close">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-body-custom">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label for="taskName" class="form-label">
-                                Task name
-                            </label>
-                            <input type="text" class="form-control" id="taskName"
-                                   placeholder="Ex: Maquetter la page d'accueil" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="priority" class="form-label">
-                                Priority
-                            </label>
-                            <select class="form-select" id="priority">
-                                <option value="">Choose priority</option>
-                                <option value="high">High</option>
-                                <option value="medium">Medium</option>
-                                <option value="low">Low</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="status" class="form-label">
-                                Status
-                            </label>
-                            <select class="form-select" id="status">
-                                <option value="">Choose status</option>
-                                <option value="todo">To do</option>
-                                <option value="in-progress">In progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <label for="description" class="form-label">
-                                Description
-                            </label>
-                            <textarea class="form-control" id="description"
-                                      rows="3"
-                                      placeholder="Describe your task..."
-                                      required></textarea>
-                        </div>
-                        <div class="col-12">
-                            <label for="taskAssigned" class="form-label">
-                                Assigned to
-                            </label>
-                            <select class="form-select" id="taskAssigned" required>
-                                <option value="choose">Choose a team member's name</option>
-                                <option value="Amina Haddad">Amina Haddad</option>
-                                <option value="Yasmine Benali">Yasmine Benali</option>
-                                <option value="Thomas Leroy">Thomas Leroy</option>
-                                <option value="Lucas Martin">Lucas Martin</option>
-                                <option value="Inès Moreau">Inès Moreau</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer-custom">
-                    <button id="submitBtn" type="button" class="btn submit-btn">
-                        Create task
-                    </button>
-                </div>
-            </div>
-        </div>
     </header>
-    <div class="row mb-4">
-        <form id="filterForm" class="row mb-4">
-            <div class="col-md-4 mb-2">
-                <label>
-                    <input type="text" id="keywordFilter" class="form-control" placeholder="Search tasks...">
-                </label>
-            </div>
-            <div class="col-md-3 mb-2">
-                <label>
-                    <select class="form-select" id="priorityFilter">
-                        <option value="">All priorities</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                </label>
-            </div>
-            <div class="col-md-3 mb-2">
-                <label>
-                    <select class="form-select" id="assignedFilter">
-                        <option value="">Everyone</option>
-                        <option value="Amina Haddad">Amina Haddad</option>
-                        <option value="Yasmine Benali">Yasmine Benali</option>
-                        <option value="Thomas Leroy">Thomas Leroy</option>
-                        <option value="Lucas Martin">Lucas Martin</option>
-                        <option value="Inès Moreau">Inès Moreau</option>
-                    </select>
-                </label>
-            </div>
-            <div class="col-md-2 mb-2">
-                <button type="reset" class="btn btn-outline-secondary w-100" id="resetBtn">
-                    Reset
-                </button>
-            </div>
-        </form>
-        <p id="noResults" style="display: none;">
-            No cards match your filters.
-        </p>
-    </div>
+    <form id="filterForm" class="row mb-4">
+        <div class="col-md-4 mb-2">
+            <label>
+                <input type="text" id="keywordFilter" class="form-control" placeholder="Search tasks...">
+            </label>
+        </div>
+        <div class="col-md-3 mb-2">
+            <label>
+                <select class="form-select" id="priorityFilter">
+                    <option value="">All priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </label>
+        </div>
+        <div class="col-md-3 mb-2">
+            <label>
+                <select class="form-select" id="assignedFilter">
+                    <option value="">Everyone</option>
+                    <option value="Amina Haddad">Amina Haddad</option>
+                    <option value="Yasmine Benali">Yasmine Benali</option>
+                    <option value="Thomas Leroy">Thomas Leroy</option>
+                    <option value="Lucas Martin">Lucas Martin</option>
+                    <option value="Inès Moreau">Inès Moreau</option>
+                </select>
+            </label>
+        </div>
+        <div class="col-md-2 mb-2">
+            <button type="reset" class="btn btn-outline-secondary w-100" id="resetBtn">
+                Reset
+            </button>
+        </div>
+    </form>
+    <p id="noResults" style="display: none;">
+        No cards match your filters.
+    </p>
     <div class="row" id="container">
     </div>
     <div class="error-handler" id="errorHandler">
@@ -134,6 +60,82 @@
     <div class="loader-container" id="loader">
         <div class="loader"></div>
         <p>Loading...</p>
+    </div>
+    <div id="addCardModal" class="add-card-modal">
+        <div class="modal-content">
+            <div class="modal-header-custom">
+                <div>
+                    <h4>Add a new task</h4>
+                </div>
+                <button type="button" class="close" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body-custom">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="taskName" class="form-label">
+                            Task name
+                        </label>
+                        <input type="text" class="form-control" id="taskName"
+                               placeholder="Ex: Maquetter la page d'accueil" required>
+                        <small class="discountError text-danger"></small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="priority" class="form-label">
+                            Priority
+                        </label>
+                        <select class="form-select" id="priority">
+                            <option value="">Choose priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <small class="discountError text-danger"></small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">
+                            Status
+                        </label>
+                        <select class="form-select" id="status">
+                            <option value="">Choose status</option>
+                            <option value="todo">To do</option>
+                            <option value="in-progress">In progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                        <small class="discountError text-danger"></small>
+                    </div>
+                    <div class="col-12">
+                        <label for="description" class="form-label">
+                            Description
+                        </label>
+                        <textarea class="form-control" id="description" rows="3"
+                                  placeholder="Describe your task..." required>
+                            </textarea>
+                        <small class="discountError text-danger"></small>
+                    </div>
+                    <div class="col-12">
+                        <label for="taskAssigned" class="form-label">
+                            Assigned to
+                        </label>
+                        <select class="form-select" id="taskAssigned" required>
+                            <option value="">Choose a team member's name</option>
+                            <option value="Amina Haddad">Amina Haddad</option>
+                            <option value="Yasmine Benali">Yasmine Benali</option>
+                            <option value="Thomas Leroy">Thomas Leroy</option>
+                            <option value="Lucas Martin">Lucas Martin</option>
+                            <option value="Inès Moreau">Inès Moreau</option>
+                        </select>
+                        <small class="discountError text-danger"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer-custom">
+                <button id="submitBtn" type="button" class="btn submit-btn">
+                    Create task
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

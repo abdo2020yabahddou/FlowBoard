@@ -1,7 +1,6 @@
-import {container, errorHandler, errorHandlerMsg, getData, loader} from './api.js';
+import {container, errorHandler, errorHandlerMsg, getData, loader, state} from './api.js';
 import {renderCards} from "./render.js";
 
-const stateFilter = {cards: []};
 const filter = document.getElementById("filterForm")
 const resetBtn = document.getElementById("resetBtn")
 const priorityFilter = document.getElementById("priorityFilter")
@@ -25,12 +24,8 @@ function getDataFiltered() {
     }
 
     const url = `https://flowboard-api-virid.vercel.app/cards?${params.toString()}`;
-
     loader.style.display = "block";
     errorHandlerMsg.style.display = "none";
-
-    console.log("Request URL:", url);
-    console.log("Search value:", keywordFilter.value);
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -39,7 +34,7 @@ function getDataFiltered() {
             return response.json();
         })
         .then(result => {
-            stateFilter.cards = result;
+            state.cards = result;
             displayFilteredCards();
             loader.style.display = "none";
         })
@@ -50,20 +45,16 @@ function getDataFiltered() {
 
 function displayFilteredCards() {
     noResults.style.display =
-        stateFilter.cards.length === 0 ? "block" : "none";
+        state.cards.length === 0 ? "block" : "none";
 
-    renderCards(stateFilter.cards, container);
+    renderCards(state.cards, container);
 }
 
 priorityFilter.addEventListener("change", getDataFiltered);
-assignedFilter.addEventListener("change", () => {
-        console.log("You entered:", keywordFilter.value);
-        getDataFiltered()
-    }
-);
+assignedFilter.addEventListener("change", getDataFiltered);
 keywordFilter.addEventListener("input", getDataFiltered);
-filter.addEventListener("submit", event => {
-    event.preventDefault();
+filter.addEventListener("submit", e => {
+    e.preventDefault();
 });
 resetBtn.addEventListener("click", () => {
     filter.reset();

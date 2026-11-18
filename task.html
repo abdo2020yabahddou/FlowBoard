@@ -51,8 +51,7 @@
     <p id="noResults" style="display: none;">
         No cards match your filters.
     </p>
-    <div class="row" id="container">
-    </div>
+    <div class="row" id="container"></div>
     <div class="error-handler" id="errorHandler">
         <p> error, please try again</p>
         <button id="refreshBtn"> refresh</button>
@@ -65,7 +64,7 @@
         <div class="modal-content">
             <div class="modal-header-custom">
                 <div>
-                    <h4>Add a new task</h4>
+                    <h4 id="AddTaskTitle">Add a new task</h4>
                 </div>
                 <button type="button" class="close" aria-label="Close">
                     &times;
@@ -73,6 +72,9 @@
             </div>
             <div class="modal-body-custom">
                 <div class="row g-3">
+                    <div id="idTask" hidden="hidden">
+                        where the id is
+                    </div>
                     <div class="col-12">
                         <label for="taskName" class="form-label">
                             Task name
@@ -130,9 +132,14 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer-custom">
+            <div id="submitBtnDiv" class="modal-footer-custom">
                 <button id="submitBtn" type="button" class="btn submit-btn">
                     Create task
+                </button>
+            </div>
+            <div class="modal-footer-custom">
+                <button id="saveButton" type="button" class="btn submit-btn" style="display: none">
+                    save
                 </button>
             </div>
         </div>
@@ -142,5 +149,6 @@
 <script type="module" src="filter.js"></script>
 <script type="module" src="api.js"></script>
 <script type="module" src="addCard.js"></script>
+<script type="module" src="update.js"></script>
 </body>
 </html>

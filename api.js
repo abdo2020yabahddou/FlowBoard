@@ -1,13 +1,26 @@
 import {renderCards} from "./render.js";
+import axios from "axios";
 
 export const state = {cards: []};
 export const refreshBtn = document.getElementById("refreshBtn")
 export const errorHandlerMsg = document.getElementById("errorHandler")
 export const loader = document.getElementById("loader")
+export const container = document.getElementById("container");
 
-export function getData() {
-    loader.style.display = "block"
-    fetch("https://flowboard-api-virid.vercel.app/cards")
+
+export async function getData() {
+    loader.style.display = "block";
+    const url = "https://flowboard-api-virid.vercel.app/cards"
+    try {
+        const response = await axios.get(url);
+        state.cards = response.data;
+        await displayCards()
+    } catch (error) {
+        errorHandler(error);
+    } finally {
+        loader.style.display = "none";
+    }
+    /*fetch("https://flowboard-api-virid.vercel.app/cards")
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
@@ -23,7 +36,7 @@ export function getData() {
         .catch(error => {
                 errorHandler(error);
             }
-        )
+        )*/
 }
 
 export function errorHandler(error) {
@@ -32,11 +45,10 @@ export function errorHandler(error) {
     console.log(error.message)
 }
 
-refreshBtn.addEventListener("click", () => {
-    getData()
+refreshBtn.addEventListener("click", async () => {
+    await getData();
 })
 
-export const container = document.getElementById("container");
-export function displayCards() {
-    renderCards(state.cards, container);
+export async function displayCards() {
+    renderCards(state.cards);
 }

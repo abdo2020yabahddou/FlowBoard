@@ -178,6 +178,24 @@ h1 {
     color: #777;
 }
 
+.btn-danger {
+    background-color: #a52834;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+}
+
+.btn-danger:active {
+    background-color: #a52834;
+}
+
 .error-handler {
     display: none;
 }

@@ -1,5 +1,6 @@
-import {container, errorHandler, errorHandlerMsg, getData, loader, state} from './api.js';
+import {container, errorHandler, getData, loader, state} from './api.js';
 import {renderCards} from "./render.js";
+import axios from "axios";
 
 const filter = document.getElementById("filterForm")
 const resetBtn = document.getElementById("resetBtn")
@@ -8,7 +9,7 @@ const assignedFilter = document.getElementById("assignedFilter")
 const noResults = document.getElementById("noResults");
 const keywordFilter = document.getElementById("keywordFilter");
 
-function getDataFiltered() {
+async function getDataFiltered() {
     const params = new URLSearchParams();
 
     if (priorityFilter.value !== "") {
@@ -24,9 +25,16 @@ function getDataFiltered() {
     }
 
     const url = `https://flowboard-api-virid.vercel.app/cards?${params.toString()}`;
-    loader.style.display = "block";
-    errorHandlerMsg.style.display = "none";
-    fetch(url)
+    try {
+        const response = await axios.get(url)
+        state.cards = response.data
+        displayFilteredCards()
+    } catch (error) {
+        errorHandler(error);
+    } finally {
+        loader.style.display = "none";
+    }
+    /*fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
@@ -35,19 +43,18 @@ function getDataFiltered() {
         })
         .then(result => {
             state.cards = result;
+            console.log(result)
             displayFilteredCards();
             loader.style.display = "none";
         })
         .catch(error => {
             errorHandler(error)
-        });
+        });*/
 }
 
 function displayFilteredCards() {
-    noResults.style.display =
-        state.cards.length === 0 ? "block" : "none";
-
-    renderCards(state.cards, container);
+    noResults.style.display = state.cards.length === 0 ? "block" : "none";
+    renderCards(state.cards);
 }
 
 priorityFilter.addEventListener("change", getDataFiltered);
@@ -55,12 +62,13 @@ assignedFilter.addEventListener("change", getDataFiltered);
 keywordFilter.addEventListener("input", getDataFiltered);
 filter.addEventListener("submit", e => {
     e.preventDefault();
+
 });
-resetBtn.addEventListener("click", () => {
+resetBtn.addEventListener("click", async () => {
     filter.reset();
     noResults.style.display = "none"
     container.innerHTML = ""
-    getData()
+    await getData()
 });
 
-getDataFiltered()
+await getDataFiltered()

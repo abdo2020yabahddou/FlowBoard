@@ -1,5 +1,6 @@
 import {renderCards} from "./render.js";
 import {state} from "./api.js";
+import {addTaskTitleElement} from "./update";
 
 const addCardBtn = document.getElementById("addCardBtn")
 const addCardModal = document.getElementById("addCardModal")
@@ -40,6 +41,7 @@ function emptyFields() {
 
 export function hideModal() {
     addCardModal.style.display = "none"
+    addTaskTitleElement.textContent = ""
 }
 
 export function showModal() {
@@ -47,6 +49,7 @@ export function showModal() {
 }
 
 addCardBtn.addEventListener("click", () => {
+    addTaskTitleElement.textContent = "Add a new task"
     showModal()
 })
 

@@ -46,6 +46,7 @@ export function createTaskCard(card) {
 
     const br = document.createElement("br");
 
+    const div = document.createElement("div")
     const deleteBtn = document.createElement("button")
     deleteBtn.classList.add("bg-warning", "text-dark")
     deleteBtn.textContent = "delete"
@@ -82,7 +83,8 @@ export function createTaskCard(card) {
         openEditModal(card)
     })
 
-    taskCard.append(taskTitle, description, priority, br, assignee, deleteBtn, updateBtn);
+    div.append(deleteBtn,updateBtn)
+    taskCard.append(taskTitle, description, priority, br, assignee, div);
     return taskCard;
 }
 

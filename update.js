@@ -1,10 +1,10 @@
-import {errorHandler, loader, state} from "./api.js";
+import {errorHandler, getData, loader, state} from "./api.js";
 import axios from "axios";
 import {description, hideModal, priority, showModal, statusTask, taskAssigned, taskId, taskName,} from "./addCard.js";
 import {renderCards} from "./render.js";
 
 const submitBtnDiv = document.getElementById("submitBtnDiv")
-const addTaskTitleElement = document.getElementById("AddTaskTitle")
+export const addTaskTitleElement = document.getElementById("AddTaskTitle")
 const saveBtn = document.getElementById("saveButton")
 
 export async function editItem() {
@@ -52,5 +52,6 @@ saveBtn.addEventListener("click", async () => {
             icon: "success"
         });
         hideModal()
+        await getData()
     }
 })

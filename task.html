@@ -13,6 +13,35 @@
     <header class="d-flex justify-content-between align-items-center mb-4">
         <h1>Task Board</h1>
         <button class="btn btn-primary" id="addCardBtn">+ New Card</button>
+        <button class="btn btn-primary" id="generateWithAI">+ Generate with AI</button>
+        <div class="addTasks-byAI-modal" id="addTasksByAiModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3>Generate Tasks with AI</h3>
+                    </div>
+                    <button type="button" class="close-modal" id="closeAiModal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="descriptionForAi" class="form-label">
+                        Description
+                    </label>
+                    <textarea class="form-control" id="descriptionForAi" rows="4"
+                              placeholder="Describe what you want..." required></textarea>
+                    <label for="count" class="form-label">
+                        Number of tasks
+                    </label>
+                    <input type="number" id="count" class="form-control" min="1" max="10" placeholder="ex: 5">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="createTasksByAI">
+                        Generate Tasks
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
     <form id="filterForm" class="row mb-4">
         <div class="col-md-4 mb-2">
@@ -151,5 +180,7 @@
 <script type="module" src="addCard.js"></script>
 <script type="module" src="update.js"></script>
 <script type="module" src="delete.js"></script>
+<script type="module" src="addTasksbyAi.js"></script>
+<script type="module" src="config.js"></script>
 </body>
 </html>

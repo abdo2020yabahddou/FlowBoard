@@ -1,5 +1,6 @@
 import {container, state} from "./api.js";
 import {openEditModal} from "./update.js";
+import {deleteItem} from "./delete.js";
 
 export const columns = [
     {
@@ -49,9 +50,6 @@ export function createTaskCard(card) {
     deleteBtn.classList.add("bg-warning", "text-dark")
     deleteBtn.textContent = "delete"
 
-    const updateBtn = document.createElement("button")
-    updateBtn.textContent = "update"
-
     deleteBtn.addEventListener("click", () => {
         Swal.fire({
             title: "Are you sure?",
@@ -62,17 +60,23 @@ export function createTaskCard(card) {
             cancelButtonColor: "#3085d6",
             confirmButtonText: "Yes, delete it!",
             cancelButtonText: "No, cancel"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                taskCard.remove()
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your item has been deleted.",
-                    icon: "success"
-                });
+                const deleted = await deleteItem(card.id)
+                if (deleted) {
+                    taskCard.remove()
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your item has been deleted.",
+                        icon: "success"
+                    });
+                }
             }
         });
     })
+
+    const updateBtn = document.createElement("button")
+    updateBtn.textContent = "update"
 
     updateBtn.addEventListener("click", () => {
         openEditModal(card)

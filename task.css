@@ -125,6 +125,121 @@ h1 {
     font-weight: 600;
 }
 
+.addTasks-byAI-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.addTasks-byAI-modal .modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.modal-header h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 7px;
+}
+
+.modal-header p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+.close-modal {
+    background: #f1f5f9;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 22px;
+    color: #64748b;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-body .form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 8px;
+}
+
+.modal-body .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    font-size: 14px;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.modal-body textarea.form-control {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.modal-body .form-control:focus {
+    border-color: #8b5cf6;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+.modal-footer {
+    margin-top: 25px;
+}
+
+#createTasksByAI {
+    width: 100%;
+    padding: 13px 18px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7c3aed, #6366f1);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
 .submit-btn {
     background: #394b32;
     color: #ffffff;

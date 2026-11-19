@@ -1,4 +1,4 @@
-import {displayCards, errorHandler, loader, state} from "./api.js";
+import {errorHandler, loader, state} from "./api.js";
 import axios from "axios";
 import {description, hideModal, priority, showModal, statusTask, taskAssigned, taskId, taskName,} from "./addCard.js";
 import {renderCards} from "./render.js";
@@ -18,8 +18,8 @@ export async function editItem() {
     }
     const url = `https://flowboard-api-virid.vercel.app/cards/${id}?password=1234`;
     try {
-        const response = await axios.patch(url, data);
-        state.cards = state.cards.filter(card => card.id )
+        await axios.patch(url, data);
+        state.cards = state.cards.filter(card => card.id !== id)
         renderCards(state.cards)
         return true;
     } catch (error) {
@@ -46,7 +46,6 @@ export function openEditModal(item) {
 saveBtn.addEventListener("click", async () => {
     const success = await editItem()
     if (success) {
-        await displayCards()
         Swal.fire({
             title: "Edited!",
             text: "Your item has been edited.",

@@ -20,23 +20,6 @@ export async function getData() {
     } finally {
         loader.style.display = "none";
     }
-    /*fetch("https://flowboard-api-virid.vercel.app/cards")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(
-            result => {
-                state.cards = result;
-                displayCards();
-                loader.style.display = "none"
-            })
-        .catch(error => {
-                errorHandler(error);
-            }
-        )*/
 }
 
 export function errorHandler(error) {
@@ -50,5 +33,5 @@ refreshBtn.addEventListener("click", async () => {
 })
 
 export async function displayCards() {
-    renderCards(state.cards);
+    renderCards();
 }

@@ -34,36 +34,16 @@ async function getDataFiltered() {
     } finally {
         loader.style.display = "none";
     }
-    /*fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(result => {
-            state.cards = result;
-            console.log(result)
-            displayFilteredCards();
-            loader.style.display = "none";
-        })
-        .catch(error => {
-            errorHandler(error)
-        });*/
 }
 
 function displayFilteredCards() {
     noResults.style.display = state.cards.length === 0 ? "block" : "none";
-    renderCards(state.cards);
+    renderCards();
 }
 
 priorityFilter.addEventListener("change", getDataFiltered);
 assignedFilter.addEventListener("change", getDataFiltered);
 keywordFilter.addEventListener("input", getDataFiltered);
-filter.addEventListener("submit", e => {
-    e.preventDefault();
-
-});
 resetBtn.addEventListener("click", async () => {
     filter.reset();
     noResults.style.display = "none"

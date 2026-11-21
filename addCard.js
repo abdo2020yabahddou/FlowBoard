@@ -1,6 +1,7 @@
 import {renderCards} from "./render.js";
-import {state} from "./api.js";
+import {errorHandler, getData, state} from "./api.js";
 import {addTaskTitleElement} from "./update";
+import axios from "axios";
 
 const addCardBtn = document.getElementById("addCardBtn")
 const addCardModal = document.getElementById("addCardModal")
@@ -53,19 +54,19 @@ addCardBtn.addEventListener("click", () => {
     showModal()
 })
 
-window.onclick = function (event) {
+addCardModal.addEventListener("click", (event) => {
     if (event.target === addCardModal) {
         hideModal()
         emptyFields()
     }
-}
+})
 
 closeBtn.addEventListener("click", () => {
     hideModal()
     emptyFields()
 })
 
-function validateTaskName() {
+export function validateTaskName() {
     const namePattern = /^[\p{L}\s]+$/u;
     if (taskName.value.trim() === "") {
         showError(0, "Le nom est obligatoire.");
@@ -115,7 +116,7 @@ export function validateFields() {
     return isNameValid && isPriorityValid && isStatusValid && isDescriptionValid && isAssigneeValid;
 }
 
-submitBtn.addEventListener("click", () => {
+submitBtn.addEventListener("click", async () => {
     if (validateFields() === false) {
         return;
     }
@@ -128,8 +129,23 @@ submitBtn.addEventListener("click", () => {
         status: statusTask.value
     };
 
-    state.cards.push(newTask);
-    renderCards(state.cards);
-    emptyFields();
-    hideModal();
+    try {
+        const url = "https://flowboard-api-virid.vercel.app/cards?password=1234";
+        await axios.post(url, newTask);
+        await getData();
+        emptyFields();
+        hideModal();
+        Swal.fire({
+            title: "Added!",
+            text: "Your card has been added.",
+            icon: "success"
+        });
+    } catch (error) {
+        errorHandler(error);
+        Swal.fire({
+            title: "Error!",
+            text: "Could not add your card.",
+            icon: "error"
+        });
+    }
 });

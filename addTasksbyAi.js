@@ -1,15 +1,15 @@
 import {displayCards, errorHandler, getData, loader} from "./api.js";
 import axios from "axios";
-import {CONFIG} from "./config";
+import {CONFIG} from "./config.js";
 
-const generateWithAIElement = document.getElementById("generateWithAI")
+const generateWithAIBtn = document.getElementById("generateWithAI")
 const addTasksByAiModal = document.getElementById("addTasksByAiModal")
-const createTasksByAi = document.getElementById("createTasksByAI")
+const createTasksByAIBtn = document.getElementById("createTasksByAI")
 const descriptionForAi = document.getElementById("descriptionForAi")
 const countElement = document.getElementById("count")
 const closeAiModalElement = document.getElementById("closeAiModal")
 
-generateWithAIElement.addEventListener("click", () => {
+generateWithAIBtn.addEventListener("click", () => {
     addTasksByAiModal.style.display = "block"
 })
 
@@ -30,7 +30,7 @@ window.onclick = function (event) {
     }
 }
 
-createTasksByAi.addEventListener("click", async () => {
+createTasksByAIBtn.addEventListener("click", async () => {
     if (descriptionForAi.value === "" || countElement.value === "") {
         return false;
     }

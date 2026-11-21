@@ -1,6 +1,6 @@
-import {errorHandler, getData, loader, state} from "./api.js";
+import {errorHandler, getData, loader} from "./api.js";
 import axios from "axios";
-import {description, hideModal, priority, showModal, statusTask, taskAssigned, taskId, taskName,} from "./addCard.js";
+import {description, hideModal, priority, showModal, statusTask, taskAssigned, taskId, taskName, validateFields,} from "./addCard.js";
 import {renderCards} from "./render.js";
 
 const submitBtnDiv = document.getElementById("submitBtnDiv")
@@ -19,8 +19,7 @@ export async function editItem() {
     const url = `https://flowboard-api-virid.vercel.app/cards/${id}?password=1234`;
     try {
         await axios.patch(url, data);
-        state.cards = state.cards.filter(card => card.id !== id)
-        renderCards(state.cards)
+        renderCards()
         return true;
     } catch (error) {
         errorHandler(error);
@@ -30,13 +29,13 @@ export async function editItem() {
     }
 }
 
-export function openEditModal(item) {
-    taskId.value = item.id
-    taskName.value = item.title
-    description.value = item.description
-    statusTask.value = item.status
-    priority.value = item.priority
-    taskAssigned.value = item.assignee
+export function openEditModal(card) {
+    taskId.value = card.id
+    taskName.value = card.title
+    description.value = card.description
+    statusTask.value = card.status
+    priority.value = card.priority
+    taskAssigned.value = card.assignee
     submitBtnDiv.style.display = "none";
     addTaskTitleElement.textContent = "Update the task informations"
     saveBtn.style.display = "block"
@@ -44,6 +43,9 @@ export function openEditModal(item) {
 }
 
 saveBtn.addEventListener("click", async () => {
+    if (validateFields() === false) {
+        return;
+    }
     const success = await editItem()
     if (success) {
         Swal.fire({
